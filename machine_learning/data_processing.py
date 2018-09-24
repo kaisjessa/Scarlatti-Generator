@@ -4,7 +4,9 @@ from keras.utils import np_utils
 import pickle
 
 #open text file with text
-text = (open("data/scarlatti_text.txt").read())
+#text = (open("data/scarlatti_text.txt").read())
+with open('data/training_data.pkl', 'rb') as f:  # Python 3: open(..., 'rb')
+    text = pickle.load(f)
 
 #sort list of unique characters in text
 chars = sorted(list(set(text)))
