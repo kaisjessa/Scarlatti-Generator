@@ -8,10 +8,7 @@ from keras.layers import Dropout
 from keras.layers import LSTM
 from keras.utils import np_utils
 import pickle, sys
-<<<<<<< HEAD
 from midi_to_txt import text_to_midi
-=======
->>>>>>> master
 #from data_preprocessing import *
 
 with open('data/scarlatti_objects.pkl', 'rb') as f:  # Python 3: open(..., 'rb')
@@ -56,12 +53,9 @@ def check_model():
 
     predicted_text = "".join(output_array)
     return(predicted_text)
-<<<<<<< HEAD
 music_text = check_model()
 # music_midi = text_to_midi(music_text)
 # f = open("scarlatti_output.MID", "w+")
 # f.write(music_midi)
 # f.close()
-=======
 print(check_model())
->>>>>>> master
