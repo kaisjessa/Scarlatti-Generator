@@ -4,9 +4,9 @@ from keras.utils import np_utils
 import pickle
 
 #open text file with text
-#text = (open("data/scarlatti_text.txt").read())
 with open('data/training_data.pkl', 'rb') as f:  # Python 3: open(..., 'rb')
     text = pickle.load(f)
+text = text[0]
 
 #sort list of unique characters in text
 chars = sorted(list(set(text)))
@@ -23,7 +23,6 @@ text_length = len(text)
 str_length = 100
 print("Unique chars:", len(chars))
 print("Text length:", text_length)
-
 #loop through text
 for i in range(0, text_length - str_length, 1):
     #add a list of length str_length to training data
@@ -40,5 +39,5 @@ X_2 = X_2 / float(len(chars))
 #convert Y to a one-hot array
 y_2 = np_utils.to_categorical(y)
 
-with open('data/scarlatti_objects.pkl', 'wb') as f:
+with open('data/processed_data.pkl', 'wb') as f:
     pickle.dump([X, X_2, y, y_2, char_to_int, int_to_char, chars], f)

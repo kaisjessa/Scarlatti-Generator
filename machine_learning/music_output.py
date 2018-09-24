@@ -9,29 +9,33 @@ from keras.layers import LSTM
 from keras.utils import np_utils
 import pickle, sys
 from midi_to_txt import text_to_midi
+from music21 import converter, instrument, note, chord, stream
 #from data_preprocessing import *
 
-with open('data/scarlatti_objects.pkl', 'rb') as f:  # Python 3: open(..., 'rb')
+with open('data/processed_data.pkl', 'rb') as f:  # Python 3: open(..., 'rb')
     X, _, y, _, chat_to_int, int_to_char, chars = pickle.load(f)
 
-text = (open("data/scarlatti_text.txt").read())#.lower()
-chars = sorted(list(set(text.split(" "))))
+with open('data/training_data.pkl', 'rb') as f:  # Python 3: open(..., 'rb')
+    text = pickle.load(f)
+
+text = text[0]
+chars = sorted(list(set(text)))
 
 #load model
-model = keras.models.load_model("data/final_model.h5")
+model = keras.models.load_model("data/test_model.h5")
 
 #sample_char = "" if len(sys.argv) < 2 else sys.argv[1]
 #take an array of inputs
-output_array = []
 
 def check_model():
+    output_array = []
     #random starting point from training data for generation
     int_train = X[random.randint(0, len(X))]
     #convert starting point back to characters
     chars_array = [int_to_char[n] for n in int_train]
 
     #number of characters to generate
-    for i in range(400):
+    for i in range(500):
         #reshape data to feed to NN
         x = np.reshape(int_train, (1, len(int_train), 1))
         #normalize for NN
@@ -40,7 +44,6 @@ def check_model():
         #the prediction is the index of the next character index
         #argmax takes the highest number in the onehot array
         int_prediction = np.argmax(model.predict(x, verbose=0))
-        #print(model.predict(x, verbose=0))
 
         #append prediction to string array for output
         chars_array.append(int_to_char[int_prediction])
@@ -51,11 +54,10 @@ def check_model():
         #drop first element for next iteration
         int_train = int_train[1:]
 
-    predicted_text = "".join(output_array)
-    return(predicted_text)
+    return(output_array)
+
 music_text = check_model()
-# music_midi = text_to_midi(music_text)
-# f = open("scarlatti_output.MID", "w+")
-# f.write(music_midi)
-# f.close()
-print(check_model())
+music_midi = text_to_midi(music_text)
+midi_stream = stream.Stream(music_midi)
+midi_stream.write('midi', fp='model_output.mid')
+print("MIDI saved")
