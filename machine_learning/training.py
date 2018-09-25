@@ -9,7 +9,7 @@ from keras.layers import LSTM
 from keras.utils import np_utils
 #from data_processing import *
 
-with open('data/processed_data.pkl', 'rb') as f:  # Python 3: open(..., 'rb')
+with open('data/models/processed_data.pkl', 'rb') as f:  # Python 3: open(..., 'rb')
     _, X_2, _, y_2, _, _, _ = pickle.load(f)
 
 #Keras NN
@@ -36,12 +36,12 @@ model.add(Dense(y_2.shape[1], activation='softmax')) #layer 4
 model.compile(loss='categorical_crossentropy', optimizer='adam')
 print("Model compiled")
 
-filepath = "data/current_model.{epoch:02d}.h5"
+filepath = "data/models/current_model.h5"
 checkpoint = ModelCheckpoint(filepath, monitor='loss', verbose=1, save_best_only=True, mode='min')
 callbacks_list = [checkpoint]
 
 #train the model
-model.fit(X_2, y_2, epochs=100, batch_size=50, callbacks=callbacks_list)
+model.fit(X_2, y_2, epochs=128, batch_size=64, callbacks=callbacks_list)
 #save the model
-model.save("data/final_model.h5")
+model.save("data/models/final_model.h5")
 print("Training Completed!")
