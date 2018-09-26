@@ -11,9 +11,9 @@ def midi_to_text(file_path):
 	#go through all midi files in folder
 	i = 1
 	for file in glob.glob(file_path):
-		i += 1
 		if(i >= 100):
 			return(notes)
+		i += 1
 		#read the file
 		midi = converter.parse(file)
 		#current notes
@@ -35,4 +35,3 @@ out = midi_to_text("data/scarlatti_midi/*.MID")
 with open('data/models/training_data.pkl', 'wb') as f:
     pickle.dump([out], f)
 print("done")
-
