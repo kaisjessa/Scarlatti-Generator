@@ -5,18 +5,13 @@ import random
 from music21 import converter, instrument, note, chord
 
 #returns character sequence from midi folder
-def midi_to_text(file_path, num_files):
+def midi_to_text(file_path):
 	#array of characters representing notes
 	notes = []
 	#go through all midi files in folder
-	i = 1
 	for file in glob.glob(file_path):
-		if(i > num_files):
-			return(notes)
-		i += 1
 		#read the file
 		midi = converter.parse(file)
-		print("Parsing %s" % file)
 		#current notes
 		notes_to_parse = None
 		notes_to_parse = midi.flat
@@ -32,7 +27,7 @@ def midi_to_text(file_path, num_files):
 	#return array
 	return(notes)
 
-out = midi_to_text("data/scarlatti_midi/*.MID", 100)
+out = midi_to_text("data/small_scarlatti_midi/*.MID")
 with open('data/models/training_data.pkl', 'wb') as f:
     pickle.dump([out], f)
 print("done")

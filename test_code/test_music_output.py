@@ -55,7 +55,7 @@ text = text[0]
 chars = sorted(list(set(text)))
 
 #load model
-model = keras.models.load_model("data/models/current_model.h5")
+model = keras.models.load_model("data/models/test_model.h5")
 
 #sample_char = "" if len(sys.argv) < 2 else sys.argv[1]
 #take an array of inputs

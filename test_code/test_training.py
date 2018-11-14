@@ -9,7 +9,7 @@ from keras.layers import LSTM
 from keras.utils import np_utils
 #from data_processing import *
 
-with open('data/processed_data.pkl', 'rb') as f:  # Python 3: open(..., 'rb')
+with open('data/models/processed_data.pkl', 'rb') as f:  # Python 3: open(..., 'rb')
     _, X_2, _, y_2, _, _, _ = pickle.load(f)
 
 #Keras NN
@@ -30,5 +30,5 @@ print("Model compiled")
 #train the model
 model.fit(X_2, y_2, epochs=1, batch_size=128)
 #save the model
-model.save("data/test_model.h5")
+model.save("data/models/test_model.h5")
 print("Training Completed!")
