@@ -27,4 +27,4 @@ def train_model(num_epochs):
 	model.save("data/models/final_model.h5")
 	print("Training Completed!")
 
-train_model(128-29-22)
+train_model(128-29-22-49)
