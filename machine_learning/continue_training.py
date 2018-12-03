@@ -1,14 +1,3 @@
-#imports
-import numpy as np
-import pickle
-import keras.models
-from keras.callbacks import ModelCheckpoint
-from keras.models import Sequential
-from keras.layers import Dense
-from keras.layers import Dropout
-from keras.layers import LSTM
-from keras.utils import np_utils
-#from data_processing import *
 
 def train_model(num_epochs):
 	with open('data/models/processed_data.pkl', 'rb') as f:  # Python 3: open(..., 'rb')
@@ -27,4 +16,4 @@ def train_model(num_epochs):
 	model.save("data/models/final_model.h5")
 	print("Training Completed!")
 
-train_model(128-29-22-49)
+train_model(128-29-22)
