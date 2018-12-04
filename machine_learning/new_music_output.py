@@ -55,7 +55,7 @@ text = text[0]
 chars = sorted(list(set(text)))
 
 #load model
-model = keras.models.load_model("data/models/2_test_model.h5")
+model = keras.models.load_model("data/models/3_test_model.h5")
 
 #sample_char = "" if len(sys.argv) < 2 else sys.argv[1]
 #take an array of inputs
@@ -93,5 +93,5 @@ music_text = check_model()
 print(music_text)
 music_midi = text_to_midi(music_text)
 midi_stream = stream.Stream(music_midi)
-midi_stream.write('midi', fp='data/new_model_output.mid')
+midi_stream.write('midi', fp='data/005_model_output.mid')
 print("MIDI saved")

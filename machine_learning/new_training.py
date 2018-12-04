@@ -31,8 +31,12 @@ model.add(Dense(y_2.shape[1], activation='softmax')) #layer 4
 model.compile(loss='categorical_crossentropy', optimizer='rmsprop', metrics=['acc'])
 print("Model compiled")
 
+filepath = "data/models/new_current_model.h5"
+checkpoint = ModelCheckpoint(filepath, monitor='loss', verbose=2, save_best_only=True, mode='min')
+callbacks_list = [checkpoint]
+
 #train the model
-history = model.fit(X_2, y_2, epochs=200, batch_size=128)
+history = model.fit(X_2, y_2, epochs=128, batch_size=64, callbacks=callbacks_list)
 #save the model
-model.save("data/models/2_test_model.h5")
+model.save("data/models/5_test_model.h5")
 print("Training Completed!")

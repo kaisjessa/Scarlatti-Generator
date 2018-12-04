@@ -7,6 +7,7 @@ import pickle
 with open('data/models/training_data.pkl', 'rb') as f:  # Python 3: open(..., 'rb')
     text = pickle.load(f)
 text = text[0]
+print(len(text))
 
 #sort list of unique characters in text
 chars = sorted(list(set(text)))
@@ -20,7 +21,7 @@ int_to_char = {n:char for n,char in enumerate(chars)}
 X,y = [],[]
 text_length = len(text)
 #length of string given to NN to make prediction
-str_length = 100
+str_length = 50
 print("Unique chars:", len(chars))
 print("Text length:", text_length)
 #loop through text
