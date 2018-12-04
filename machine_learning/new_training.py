@@ -43,25 +43,6 @@ callbacks_list = [checkpoint, tensorboard]
 
 #train the model
 history = model.fit(X_2, y_2, epochs=128, batch_size=64, callbacks=callbacks_list)
-
-#plot training accuracy over time
-plt.plot(history.history['acc'])
-plt.plot(history.history['val_acc'])
-plt.title('Model accuracy')
-plt.ylabel('Accuracy')
-plt.xlabel('Epoch')
-plt.legend(['Train', 'Test'], loc='upper left')
-plt.show()
-
-#plot training loss over time
-plt.plot(history.history['loss'])
-plt.plot(history.history['val_loss'])
-plt.title('Model loss')
-plt.ylabel('Loss')
-plt.xlabel('Epoch')
-plt.legend(['Train', 'Test'], loc='upper left')
-plt.show()
-
 #save the model
 model.save("data/models/5_test_model.h5")
 print("Training Completed!")
