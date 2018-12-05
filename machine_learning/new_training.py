@@ -1,6 +1,7 @@
 #imports
 import numpy as np
 import pickle
+from time import time
 from keras.callbacks import ModelCheckpoint
 from keras.callbacks import TensorBoard
 from keras.models import Sequential
@@ -9,10 +10,9 @@ from keras.layers import Activation
 from keras.layers import Dropout
 from keras.layers import LSTM
 from keras.utils import np_utils
-import matplotlib.pyplot as plt
 #from data_processing import *
 
-with open('data/models/processed_data.pkl', 'rb') as f:  # Python 3: open(..., 'rb')
+with open('data/models/d_minor_processed_data.pkl', 'rb') as f:  # Python 3: open(..., 'rb')
     _, X_2, _, y_2, _, _, _ = pickle.load(f)
 
 #Keras NN
@@ -31,18 +31,18 @@ model.add(Dropout(0.2))
 model.add(Dense(y_2.shape[1], activation='softmax')) #layer 4
 
 #minimize loss
-model.compile(loss='categorical_crossentropy', optimizer='rmsprop', metrics=['acc'])
+model.compile(loss='categorical_crossentropy', optimizer='rmsprop', metrics=['accuracy'])
 print("Model compiled")
 
 #save models after every epoch if the loss improves
 filepath = "data/models/new_current_model.h5"
 checkpoint = ModelCheckpoint(filepath, monitor='loss', verbose=2, save_best_only=True, mode='min')
-tensorboard = TensorBoard(log_dir="logs/{}".format(time()))
+tensorboard = TensorBoard(log_dir="logs/{}".format("D_MINOR_ONLY".format(time())))
 #tensorboard --logdir=logs/
 callbacks_list = [checkpoint, tensorboard]
 
 #train the model
-history = model.fit(X_2, y_2, epochs=128, batch_size=64, callbacks=callbacks_list)
+model.fit(X_2, y_2, epochs=128, batch_size=64, callbacks=callbacks_list)
 #save the model
-model.save("data/models/5_test_model.h5")
+model.save("data/models/d_minor_model.h5")
 print("Training Completed!")

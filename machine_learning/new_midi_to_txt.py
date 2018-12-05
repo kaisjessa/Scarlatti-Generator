@@ -32,8 +32,8 @@ def midi_to_text(file_path, num_files=555):
 	#return array
 	return(notes)
 
-out = midi_to_text("data/scarlatti_midi/*.MID", 100)
+out = midi_to_text("data/scarlatti_d_minor_sonatas/*.MID", 32)
 print(len(out))
-with open('data/models/training_data.pkl', 'wb') as f:
+with open('data/models/d_minor_training_data.pkl', 'wb') as f:
     pickle.dump([out], f)
 print("done")

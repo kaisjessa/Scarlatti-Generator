@@ -4,7 +4,7 @@ from keras.utils import np_utils
 import pickle
 
 #open text file with text
-with open('data/models/training_data.pkl', 'rb') as f:  # Python 3: open(..., 'rb')
+with open('data/models/d_minor_training_data.pkl', 'rb') as f:  # Python 3: open(..., 'rb')
     text = pickle.load(f)
 text = text[0]
 print(len(text))
@@ -40,5 +40,5 @@ X_2 = X_2 / float(len(chars))
 #convert Y to a one-hot array
 y_2 = np_utils.to_categorical(y)
 
-with open('data/models/processed_data.pkl', 'wb') as f:
+with open('data/models/d_minor_processed_data.pkl', 'wb') as f:
     pickle.dump([X, X_2, y, y_2, char_to_int, int_to_char, chars], f)
